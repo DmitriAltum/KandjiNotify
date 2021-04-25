@@ -1,0 +1,21 @@
+#!/bin/bash
+
+#Pulls the logged in user from console and sets user "variable" to it.
+user=$(stat -f%Su /dev/console)
+
+
+#Creates the LaunchAgent directory in the user's library if necessary
+if [ -d /users/$user/Library/LaunchAgents ]; then
+	/bin/echo "LaunchAgents directory exits"
+else
+	mkdir /users/$user/Library/LaunchAgents
+fi
+
+#Moves the LaunchAgent from the tmp directory into the logged in user's LaunchAgents directory.
+mv /tmp/com.dmitri.KandjiNotify.plist /users/$user/Library/LaunchAgents
+
+
+#Starts the LaunchAgent
+launchctl load /users/$user/Library/LaunchAgents/com.dmitri.KandjiNotify.plist
+
+exit 0
