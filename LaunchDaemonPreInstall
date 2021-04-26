@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#Checks to see if the auto-app already exists, if it does then removes the kandjinotify.sh script as it is assumed the machine is a previous/currently enrolled device.
+
+if [ -d /Applications/zoom.us.app ]; then
+	/bin/echo "Zoom already exists, removing script"
+	sudo rm -f /tmp/kandjinotify.sh
+  exit 1
+else
+	exit 0
+fi
